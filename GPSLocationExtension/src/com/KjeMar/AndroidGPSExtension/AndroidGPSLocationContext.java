@@ -20,7 +20,6 @@ public class AndroidGPSLocationContext extends FREContext {
 	public Map <String, FREFunction> getFunctions()
 	 {
 	    Map<String,FREFunction> functionMap=new java.util.HashMap<String,FREFunction>();
-	    functionMap.put("ffiShowDialogMessage",new AndroidDialogShowDialogMessageFunction());
 	    functionMap.put("ffiInit",new AndroidGPSLocationInitFunction());
 
 	    return functionMap;

@@ -6,9 +6,12 @@ import com.adobe.fre.FREExtension;
 
 public class AndroidGPSLocationExtension implements FREExtension {
 	
+	AndroidGPSLocationContext context;
+	AndroidGPSLocationListener listener;
+	
 	@Override
 	public FREContext createContext(String arg0) {
-		return new AndroidGPSLocationContext();
+		return this.context;
 	}
 
 	@Override
@@ -19,7 +22,8 @@ public class AndroidGPSLocationExtension implements FREExtension {
 
 	@Override
 	public void initialize() {
-		// TODO Auto-generated method stub
+		this.context = new AndroidGPSLocationContext();
+		this.listener = new AndroidGPSLocationListener(this.context);
 
 	}
 
