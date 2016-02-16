@@ -10,11 +10,13 @@ public class AndroidGPSLocationListener {
 
 	LocationManager locationManager;
 	AndroidGPSLocationContext context;
+	Context appContext;
 	
 	AndroidGPSLocationListener(AndroidGPSLocationContext context){
 		this.context = context;
+		this.appContext = context.getActivity().getApplicationContext();
 		locationManager = (LocationManager)
-                context.getActivity().getSystemService(Context.LOCATION_SERVICE);
+                appContext.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new GPSLocationListener();
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER, 5000, 10, locationListener);

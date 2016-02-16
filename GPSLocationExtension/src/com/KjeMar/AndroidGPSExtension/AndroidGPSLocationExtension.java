@@ -11,6 +11,8 @@ public class AndroidGPSLocationExtension implements FREExtension {
 	
 	@Override
 	public FREContext createContext(String arg0) {
+		this.context = new AndroidGPSLocationContext();
+		this.listener = new AndroidGPSLocationListener(this.context);
 		return this.context;
 	}
 
@@ -22,8 +24,7 @@ public class AndroidGPSLocationExtension implements FREExtension {
 
 	@Override
 	public void initialize() {
-		this.context = new AndroidGPSLocationContext();
-		this.listener = new AndroidGPSLocationListener(this.context);
+		
 
 	}
 
