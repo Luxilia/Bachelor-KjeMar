@@ -1,4 +1,4 @@
-package com.KjeMar.AndroidGPSExtension;
+package com.KjeMar.LocationExtension;
 
 import android.content.Context;
 import android.location.Location;

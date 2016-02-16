@@ -1,4 +1,4 @@
-package com.KjeMar.AndroidGPSExtension;
+package com.KjeMar.LocationExtension;
 
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;

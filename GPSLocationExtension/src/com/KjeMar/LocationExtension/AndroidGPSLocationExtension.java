@@ -1,4 +1,4 @@
-package com.KjeMar.AndroidGPSExtension;
+package com.KjeMar.LocationExtension;
 
 
 import com.adobe.fre.FREContext;
@@ -11,8 +11,10 @@ public class AndroidGPSLocationExtension implements FREExtension {
 	
 	@Override
 	public FREContext createContext(String arg0) {
+		
 		this.context = new AndroidGPSLocationContext();
 		this.listener = new AndroidGPSLocationListener(this.context);
+		this.context.dispatchStatusEventAsync("GPS", "Test1,test2"); //THIS THROWS AN EXCEPTION
 		return this.context;
 	}
 

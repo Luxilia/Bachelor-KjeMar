@@ -1,4 +1,4 @@
-package com.KjeMar.AndroidGPSExtension;
+package com.KjeMar.LocationExtension;
 
 import java.util.Map;
 
