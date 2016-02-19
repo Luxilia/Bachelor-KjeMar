@@ -9,6 +9,7 @@ public class AndroidGPSLocationContext extends FREContext {
 
 	
 	public android.app.Activity activity;
+	public AndroidGPSLocationListener listener; 
 	
 	@Override
 	public void dispose() {
@@ -21,6 +22,7 @@ public class AndroidGPSLocationContext extends FREContext {
 	 {
 	    Map<String,FREFunction> functionMap=new java.util.HashMap<String,FREFunction>();
 	    functionMap.put("ffiInit",new AndroidGPSLocationInitFunction());
+	    functionMap.put("ffiStartListening", new AndroidGPSStartListening());
 
 	    return functionMap;
 	}

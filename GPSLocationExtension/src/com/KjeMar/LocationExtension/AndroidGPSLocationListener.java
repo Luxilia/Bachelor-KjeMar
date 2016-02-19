@@ -14,6 +14,7 @@ public class AndroidGPSLocationListener {
 	
 	AndroidGPSLocationListener(AndroidGPSLocationContext context){
 		this.context = context;
+		context.dispatchStatusEventAsync("GPS", "700,900");
 		this.appContext = context.getActivity().getApplicationContext();
 		locationManager = (LocationManager)
                 appContext.getSystemService(Context.LOCATION_SERVICE);
