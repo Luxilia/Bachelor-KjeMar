@@ -3,6 +3,7 @@
 	<name>GPSLocationExtension</name>
 	<comment></comment>
 	<projects>
+		<project>estifuck</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

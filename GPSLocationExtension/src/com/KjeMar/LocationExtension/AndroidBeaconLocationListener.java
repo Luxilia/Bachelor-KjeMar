@@ -21,10 +21,14 @@ public class AndroidBeaconLocationListener {
 	public AndroidBeaconLocationListener(AndroidGPSLocationContext context){
 		this.appContext = context.getActivity().getApplicationContext();
 		this.context = context;
-	
+		
+		context.dispatchStatusEventAsync("Beacon", "0,0");
+		context.dispatchStatusEventAsync("Beacon", "1,1");
 		bm = new BeaconManager(appContext);
+		context.dispatchStatusEventAsync("Beacon", "2,2");
 		region = new Region("ranged region",
-                UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), null, null);
+                null, null, null);
+		context.dispatchStatusEventAsync("Beacon", "3,3");
 		 bm.setRangingListener(new BeaconManager.RangingListener() {
 	            @Override
 	            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
@@ -38,6 +42,14 @@ public class AndroidBeaconLocationListener {
 	                }
 	            }
 		 });
+		 context.dispatchStatusEventAsync("Beacon", "2000,9000");
+		 bm.connect(new BeaconManager.ServiceReadyCallback() {
+		        @Override
+		        public void onServiceReady() {
+		            bm.startRanging(region);
+		        }
+		    });
+		 
 	}
 	
 	public void sendOutput(int minor, int major){
