@@ -21,14 +21,9 @@ public class AndroidBeaconLocationListener {
 	public AndroidBeaconLocationListener(AndroidGPSLocationContext context){
 		this.appContext = context.getActivity().getApplicationContext();
 		this.context = context;
-		
-		context.dispatchStatusEventAsync("Beacon", "0,0");
-		context.dispatchStatusEventAsync("Beacon", "1,1");
 		bm = new BeaconManager(appContext);
-		context.dispatchStatusEventAsync("Beacon", "2,2");
 		region = new Region("ranged region",
                 null, null, null);
-		context.dispatchStatusEventAsync("Beacon", "3,3");
 		 bm.setRangingListener(new BeaconManager.RangingListener() {
 	            @Override
 	            public void onBeaconsDiscovered(Region region, List<Beacon> list) {
@@ -42,19 +37,44 @@ public class AndroidBeaconLocationListener {
 	                }
 	            }
 		 });
-		 context.dispatchStatusEventAsync("Beacon", "2000,9000");
-		 bm.connect(new BeaconManager.ServiceReadyCallback() {
-		        @Override
-		        public void onServiceReady() {
-		            bm.startRanging(region);
-		        }
-		    });
+		 bm.setMonitoringListener(new BeaconManager.MonitoringListener() {
+			    @Override
+			    public void onEnteredRegion(Region region, List<Beacon> list) {
+			    	int minor = list.get(0).getMinor();
+			    	int major = list.get(0).getMajor();
+			    	sendOutput(minor, major);
+			    	bm.stopMonitoring(region);
+			    }
+			    public void onExitedRegion(Region region) {
+			        // could add an "exit" notification too if you want (-:
+			    }
+			});
+		 context.dispatchStatusEventAsync("Beacon", "2000,9000"); //For debugging purposes
+		 
 		 
 	}
 	
 	public void sendOutput(int minor, int major){
 		 String output = minor + "," + major;
 		context.dispatchStatusEventAsync("Beacon", output);
+		
+	}
+	
+	public void startListening(){
+		bm.connect(new BeaconManager.ServiceReadyCallback() {
+	        @Override
+	        public void onServiceReady() {
+	            bm.startRanging(region);
+	        }
+	    });
+	}
+	
+	public void stopListening(){
+		this.bm.stopRanging(region);
+	}
+	
+	public void checkBeacons(){
+		bm.startMonitoring(region);
 	}
 	
 	

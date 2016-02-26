@@ -25,6 +25,8 @@ public class AndroidGPSLocationContext extends FREContext {
 	    functionMap.put("ffiInit",new AndroidGPSLocationInitFunction());
 	    functionMap.put("ffiStartListening", new AndroidGPSStartListening());
 	    functionMap.put("ffiStartBeaconListening", new AndroidBeaconStartListening());
+	    functionMap.put("ffiStopBeaconListening", new AndroidBeaconStopListening());
+	    functionMap.put("ffiCheckBeacons", new AndroidBeaconCheckBeacons());
 
 	    return functionMap;
 	}
