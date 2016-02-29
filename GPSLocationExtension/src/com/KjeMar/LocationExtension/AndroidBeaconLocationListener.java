@@ -74,8 +74,15 @@ public class AndroidBeaconLocationListener {
 	}
 	
 	public void checkBeacons(){
-		bm.startMonitoring(region);
+		bm.connect(new BeaconManager.ServiceReadyCallback() {
+	        @Override
+	        public void onServiceReady() {
+	        	bm.startMonitoring(region);
+	        }
+	    });
 	}
+		
+	
 	
 	
 	

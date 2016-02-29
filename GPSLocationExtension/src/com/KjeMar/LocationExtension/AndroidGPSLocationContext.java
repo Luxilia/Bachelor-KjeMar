@@ -11,6 +11,7 @@ public class AndroidGPSLocationContext extends FREContext {
 	public android.app.Activity activity;
 	public AndroidGPSLocationListener listener; 
 	public AndroidBeaconLocationListener beaconListener;
+	public AndroidWiFiLocationListener wifiListener;
 	
 	@Override
 	public void dispose() {
@@ -27,6 +28,7 @@ public class AndroidGPSLocationContext extends FREContext {
 	    functionMap.put("ffiStartBeaconListening", new AndroidBeaconStartListening());
 	    functionMap.put("ffiStopBeaconListening", new AndroidBeaconStopListening());
 	    functionMap.put("ffiCheckBeacons", new AndroidBeaconCheckBeacons());
+	    functionMap.put("ffiStartWifiListening", new AndroidWiFiStartListening());
 
 	    return functionMap;
 	}

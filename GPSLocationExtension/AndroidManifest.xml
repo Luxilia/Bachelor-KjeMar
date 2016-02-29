@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     
     <uses-feature
         android:name="android.hardware.bluetooth_le"
@@ -24,6 +25,11 @@
          <activity
             android:name="com.estimote.sdk.DefaultRequirementsCheckerCallback$Activity" />
         <receiver android:name="com.estimote.sdk.service.BeaconService$ScanAlarmBroadcastReceiver" />
+        <receiver android:name="com.KjeMar.AndroidWiFiLocationListener$receiver">
+            <intent-filter>
+                <action android:name="android.net.wifi.supplicant.CONNECTION_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
