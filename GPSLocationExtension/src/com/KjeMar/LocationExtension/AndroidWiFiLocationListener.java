@@ -47,7 +47,8 @@ public class AndroidWiFiLocationListener {
 		wifiInfo = wifiManager.getConnectionInfo ();
 		if (wifiInfo.getSupplicantState()== SupplicantState.COMPLETED) {
             wifiID = wifiInfo.getSSID();
-            
+		}else {
+			wifiID = "wifiInfo.getSupplicantState() is NOT Completed";
 		}
 		sendUpdatedSSID();
     	

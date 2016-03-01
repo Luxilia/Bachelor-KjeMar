@@ -21,6 +21,7 @@ public class AndroidBeaconLocationListener {
 	public AndroidBeaconLocationListener(AndroidGPSLocationContext context){
 		this.appContext = context.getActivity().getApplicationContext();
 		this.context = context;
+		context.dispatchStatusEventAsync("Beacon", "Fuck, off");
 		bm = new BeaconManager(appContext);
 		region = new Region("ranged region",
                 null, null, null);
@@ -82,9 +83,5 @@ public class AndroidBeaconLocationListener {
 	    });
 	}
 		
-	
-	
-	
-	
 
 }
