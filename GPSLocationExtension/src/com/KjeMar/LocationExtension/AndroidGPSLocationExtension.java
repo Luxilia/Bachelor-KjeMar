@@ -13,7 +13,6 @@ public class AndroidGPSLocationExtension implements FREExtension {
 	public FREContext createContext(String arg0) {
 		
 		this.context = new AndroidGPSLocationContext();
-//		this.context.dispatchStatusEventAsync("GPS", "Test1 test2"); //THIS THROWS AN EXCEPTION
 		return this.context;
 	}
 

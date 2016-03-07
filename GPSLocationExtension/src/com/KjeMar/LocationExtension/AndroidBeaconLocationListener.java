@@ -14,7 +14,7 @@ public class AndroidBeaconLocationListener {
 	
 	BeaconManager bm;
 	Context appContext;
-	Region region;
+	Region fullRegion;
 	AndroidGPSLocationContext context;
 	
 	
@@ -23,7 +23,7 @@ public class AndroidBeaconLocationListener {
 		this.context = context;
 		context.dispatchStatusEventAsync("Beacon", "Fuck, off");
 		bm = new BeaconManager(appContext);
-		region = new Region("ranged region",
+		fullRegion = new Region("ranged region",
                 null, null, null);
 		 bm.setRangingListener(new BeaconManager.RangingListener() {
 	            @Override
@@ -44,10 +44,11 @@ public class AndroidBeaconLocationListener {
 			    	int minor = list.get(0).getMinor();
 			    	int major = list.get(0).getMajor();
 			    	sendOutput(minor, major);
-			    	bm.stopMonitoring(region);
+			    	startListening();
 			    }
 			    public void onExitedRegion(Region region) {
-			        // could add an "exit" notification too if you want (-:
+			       stopListening();
+			       
 			    }
 			});
 		 context.dispatchStatusEventAsync("Beacon", "2000,9000"); //For debugging purposes
@@ -61,24 +62,29 @@ public class AndroidBeaconLocationListener {
 		
 	}
 	
+	public void sendExit(){
+		context.dispatchStatusEventAsync("Beacon Exit", "Does it matter?");
+	}
+	
 	public void startListening(){
 		bm.connect(new BeaconManager.ServiceReadyCallback() {
 	        @Override
 	        public void onServiceReady() {
-	            bm.startRanging(region);
+	            bm.startRanging(fullRegion);
 	        }
 	    });
 	}
 	
 	public void stopListening(){
-		this.bm.stopRanging(region);
+		this.bm.stopRanging(fullRegion);
+		sendExit();
 	}
 	
 	public void checkBeacons(){
 		bm.connect(new BeaconManager.ServiceReadyCallback() {
 	        @Override
 	        public void onServiceReady() {
-	        	bm.startMonitoring(region);
+	        	bm.startMonitoring(fullRegion);
 	        }
 	    });
 	}

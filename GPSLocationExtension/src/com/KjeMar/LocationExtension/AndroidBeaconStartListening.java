@@ -14,7 +14,7 @@ public class AndroidBeaconStartListening implements FREFunction{
 		if(context.beaconListener == null){
 			context.beaconListener = new AndroidBeaconLocationListener(context);
 		}
-		context.beaconListener.startListening();
+		context.beaconListener.checkBeacons();
 		return null;
 	}
 
