@@ -1,7 +1,13 @@
 package com.KjeMar.LocationExtension;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import android.content.Context;
+import android.location.Geocoder;
 import android.location.Location;
+import android.location.Address;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -11,6 +17,7 @@ public class AndroidGPSLocationListener {
 	LocationManager locationManager;
 	AndroidGPSLocationContext context;
 	Context appContext;
+	String locationInfo;
 	
 	AndroidGPSLocationListener(AndroidGPSLocationContext context){
 		this.context = context;
@@ -27,10 +34,22 @@ public class AndroidGPSLocationListener {
 
         @Override
         public void onLocationChanged(Location loc) {
-            double lat = loc.getLatitude();
-            double lng = loc.getLongitude();
-            String location = lat + "," + lng;
-            context.dispatchStatusEventAsync("GPS", location);
+//            double lat = loc.getLatitude();
+//            double lng = loc.getLongitude();
+//            String location = lat + "," + lng;
+//            context.dispatchStatusEventAsync("GPS", location);
+            Geocoder gcd = new Geocoder(appContext, Locale.getDefault());
+            List<Address> addresses;
+            try {
+                addresses = gcd.getFromLocation(loc.getLatitude(),
+                        loc.getLongitude(), 1);
+                if (addresses.size() > 0){
+                	locationInfo = "Locality: " + addresses.get(0).getLocality() + " Feature: " + addresses.get(0).getFeatureName() + "Thoroughfare: " + addresses.get(0).getThoroughfare();
+                	context.dispatchStatusEventAsync("GPS", locationInfo);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 		@Override

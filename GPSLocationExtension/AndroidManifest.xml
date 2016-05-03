@@ -30,6 +30,7 @@
                 <action android:name="android.net.wifi.supplicant.CONNECTION_CHANGE"/>
             </intent-filter>
         </receiver>
+        
     </application>
 
 </manifest>
