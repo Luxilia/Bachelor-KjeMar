@@ -15,13 +15,12 @@ import android.os.Bundle;
 public class AndroidGPSLocationListener {
 
 	LocationManager locationManager;
-	AndroidGPSLocationContext context;
+	AndroidLocationExtensionContext context;
 	Context appContext;
 	String locationInfo;
 	
-	AndroidGPSLocationListener(AndroidGPSLocationContext context){
+	AndroidGPSLocationListener(AndroidLocationExtensionContext context){
 		this.context = context;
-		context.dispatchStatusEventAsync("GPS", "700,900");
 		this.appContext = context.getActivity().getApplicationContext();
 		locationManager = (LocationManager)
                 appContext.getSystemService(Context.LOCATION_SERVICE);
@@ -34,22 +33,24 @@ public class AndroidGPSLocationListener {
 
         @Override
         public void onLocationChanged(Location loc) {
-//            double lat = loc.getLatitude();
-//            double lng = loc.getLongitude();
-//            String location = lat + "," + lng;
-//            context.dispatchStatusEventAsync("GPS", location);
-            Geocoder gcd = new Geocoder(appContext, Locale.getDefault());
-            List<Address> addresses;
-            try {
-                addresses = gcd.getFromLocation(loc.getLatitude(),
-                        loc.getLongitude(), 1);
-                if (addresses.size() > 0){
-                	locationInfo = "Locality: " + addresses.get(0).getLocality() + " Feature: " + addresses.get(0).getFeatureName() + "Thoroughfare: " + addresses.get(0).getThoroughfare();
-                	context.dispatchStatusEventAsync("GPS", locationInfo);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            double lat = loc.getLatitude();
+            double lng = loc.getLongitude();
+            String location = lat + "," + lng;
+            context.dispatchStatusEventAsync("GPS", location);
+            
+            //Possible way to change from lat-lng to location address
+//            Geocoder gcd = new Geocoder(appContext, Locale.getDefault());
+//            List<Address> addresses;
+//            try {
+//                addresses = gcd.getFromLocation(loc.getLatitude(),
+//                        loc.getLongitude(), 1);
+//                if (addresses.size() > 0){
+//                	locationInfo = "Locality: " + addresses.get(0).getLocality() + " Feature: " + addresses.get(0).getFeatureName() + "Thoroughfare: " + addresses.get(0).getThoroughfare();
+//                	context.dispatchStatusEventAsync("GPS", locationInfo);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
 		@Override

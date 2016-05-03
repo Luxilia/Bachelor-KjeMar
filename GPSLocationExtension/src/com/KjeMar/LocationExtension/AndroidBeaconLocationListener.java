@@ -22,12 +22,12 @@ public class AndroidBeaconLocationListener {
 	BeaconManager bm;
 	Context appContext;
 	Region fullRegion;
-	AndroidGPSLocationContext context;
+	AndroidLocationExtensionContext context;
 	String scanId;
 	CloudCallback<NearableInfo> callback;
 	
 	
-	public AndroidBeaconLocationListener(AndroidGPSLocationContext context){
+	public AndroidBeaconLocationListener(AndroidLocationExtensionContext context){
 		this.appContext = context.getActivity().getApplicationContext();
 		this.context = context;
 		EstimoteSDK.initialize(appContext, "superposition-al0", "22cdb5affc119a3dfde6f3751eaea6e7");
@@ -49,6 +49,7 @@ public class AndroidBeaconLocationListener {
 		 });
 		 bm.setNearableListener(new BeaconManager.NearableListener(){
 
+			 //TODO: Not fully implemented.
 			@Override
 			public void onNearablesDiscovered(List<Nearable> list) {
 				if(!list.isEmpty()){
@@ -92,7 +93,6 @@ public class AndroidBeaconLocationListener {
 			       
 			    }
 			});
-		 context.dispatchStatusEventAsync("Beacon", "2000,9000"); //For debugging purposes
 		 
 		 
 	}
@@ -109,7 +109,7 @@ public class AndroidBeaconLocationListener {
 	}
 	
 	public void sendExit(){
-		context.dispatchStatusEventAsync("Beacon Exit", "Does it matter?");
+		context.dispatchStatusEventAsync("Beacon Exit", "Exited beacon range");
 	}
 	
 	public void startListening(){

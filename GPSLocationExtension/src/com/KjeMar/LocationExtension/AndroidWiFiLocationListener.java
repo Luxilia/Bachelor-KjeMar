@@ -13,16 +13,15 @@ public class AndroidWiFiLocationListener {
 	
 	WifiManager wifiManager;
 	WifiInfo wifiInfo;
-	AndroidGPSLocationContext context;
+	AndroidLocationExtensionContext context;
 	Context appContext;
 	BroadcastReceiver receiver;
 	String wifiID;
 	
-	public AndroidWiFiLocationListener(AndroidGPSLocationContext context){
+	public AndroidWiFiLocationListener(AndroidLocationExtensionContext context){
 		this.context = context;
 		this.appContext = context.getActivity().getApplicationContext();
 		wifiManager = (WifiManager)appContext.getSystemService(Context.WIFI_SERVICE);
-		context.dispatchStatusEventAsync("WiFi", "Wifitest");
 		receiver = (new BroadcastReceiver(){
 			
 
@@ -42,8 +41,6 @@ public class AndroidWiFiLocationListener {
 	}
 
 	public void checkWiFi(){
-		wifiID = "256";
-		sendUpdatedSSID();
 		wifiInfo = wifiManager.getConnectionInfo ();
 		if (wifiInfo.getSupplicantState()== SupplicantState.COMPLETED) {
             wifiID = wifiInfo.getSSID();

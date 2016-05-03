@@ -8,7 +8,7 @@ public class AndroidGPSStartListening implements FREFunction{
 
 	@Override
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
-		AndroidGPSLocationContext context = (AndroidGPSLocationContext) arg0;
+		AndroidLocationExtensionContext context = (AndroidLocationExtensionContext) arg0;
 		try{
 			context.listener = new AndroidGPSLocationListener(context);
 		}

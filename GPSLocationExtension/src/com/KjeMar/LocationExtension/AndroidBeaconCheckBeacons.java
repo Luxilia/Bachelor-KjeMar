@@ -6,11 +6,11 @@ import com.adobe.fre.FREObject;
 
 public class AndroidBeaconCheckBeacons implements FREFunction{
 
-	AndroidGPSLocationContext context;
+	AndroidLocationExtensionContext context;
 	
 	@Override
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
-		this.context = (AndroidGPSLocationContext)arg0;
+		this.context = (AndroidLocationExtensionContext)arg0;
 		if(this.context.beaconListener == null){
 			this.context.beaconListener = new AndroidBeaconLocationListener(this.context);
 		}

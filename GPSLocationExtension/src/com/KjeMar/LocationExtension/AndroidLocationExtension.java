@@ -4,15 +4,15 @@ package com.KjeMar.LocationExtension;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREExtension;
 
-public class AndroidGPSLocationExtension implements FREExtension {
+public class AndroidLocationExtension implements FREExtension {
 	
-	AndroidGPSLocationContext context;
+	AndroidLocationExtensionContext context;
 	AndroidGPSLocationListener listener;
 	
 	@Override
 	public FREContext createContext(String arg0) {
 		
-		this.context = new AndroidGPSLocationContext();
+		this.context = new AndroidLocationExtensionContext();
 		return this.context;
 	}
 

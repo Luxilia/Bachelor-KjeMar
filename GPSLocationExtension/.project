@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>GPSLocationExtension</name>
+	<name>AndroidLocationExtension</name>
 	<comment></comment>
 	<projects>
 		<project>estifuck</project>
