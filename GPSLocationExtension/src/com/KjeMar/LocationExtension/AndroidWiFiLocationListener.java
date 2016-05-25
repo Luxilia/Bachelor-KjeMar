@@ -27,14 +27,15 @@ public class AndroidWiFiLocationListener {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				String action = intent.getAction();
-				if(WifiManager.NETWORK_STATE_CHANGED_ACTION.equals (action)){
-					NetworkInfo netInfo = intent.getParcelableExtra (WifiManager.EXTRA_NETWORK_INFO);
-			        if (ConnectivityManager.TYPE_WIFI == netInfo.getType ()) {
-			        	checkWiFi();
-			        	
-			        }
-				}
+					String action = intent.getAction();
+					if(WifiManager.NETWORK_STATE_CHANGED_ACTION.equals (action)){
+						NetworkInfo netInfo = intent.getParcelableExtra (WifiManager.EXTRA_NETWORK_INFO);
+				        if (ConnectivityManager.TYPE_WIFI == netInfo.getType ()) {
+				        	checkWiFi();
+				        	
+				        }
+					}
+				
 				
 			}
 		});
@@ -50,6 +51,7 @@ public class AndroidWiFiLocationListener {
 		sendUpdatedSSID();
     	
 	}
+	
 	
 	public void sendUpdatedSSID(){
 		context.dispatchStatusEventAsync("WiFi", wifiID);

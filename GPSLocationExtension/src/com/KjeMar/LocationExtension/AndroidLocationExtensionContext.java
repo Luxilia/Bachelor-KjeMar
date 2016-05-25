@@ -31,6 +31,8 @@ public class AndroidLocationExtensionContext extends FREContext {
 	    functionMap.put("ffiStartWifiListening", new AndroidWiFiStartListening());
 	    functionMap.put("ffiStartNearableListening", new AndroidNearableStartListening());
 	    functionMap.put("ffiStopNearableListening", new AndroidNearableStopListening());
+	    functionMap.put("ffiStopWifiListening", new AndroidWiFiStopListening());
+	    functionMap.put("ffiStopGPSListening", new AndroidGPSStopListening());
 
 	    return functionMap;
 	}
