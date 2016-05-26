@@ -13,6 +13,7 @@ public class AndroidGPSStopListening implements FREFunction{
 		if(context.listener != null){
 			context.listener = null;
 		}
+		context.dispatchStatusEventAsync("GPS Exit","Exited GPS listening mode");
 		return null;
 		
 	}

@@ -7,7 +7,6 @@ import com.adobe.fre.FREExtension;
 public class AndroidLocationExtension implements FREExtension {
 	
 	AndroidLocationExtensionContext context;
-	AndroidGPSLocationListener listener;
 	
 	@Override
 	public FREContext createContext(String arg0) {
@@ -18,8 +17,8 @@ public class AndroidLocationExtension implements FREExtension {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		context = null;
+		
 	}
 
 	@Override

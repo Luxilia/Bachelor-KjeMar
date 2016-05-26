@@ -12,6 +12,7 @@ AndroidLocationExtensionContext context;
 	@Override
 	public FREObject call(FREContext arg0, FREObject[] arg1) {
 		this.context = (AndroidLocationExtensionContext)arg0;
+		context.dispatchStatusEventAsync("Wifi Exit","Exited Wifi listening mode");
 		if(context.wifiListener == null){
 			return null;
 		}

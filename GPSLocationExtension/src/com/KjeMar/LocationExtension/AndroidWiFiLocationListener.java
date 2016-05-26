@@ -54,7 +54,7 @@ public class AndroidWiFiLocationListener {
 	
 	
 	public void sendUpdatedSSID(){
-		context.dispatchStatusEventAsync("WiFi", wifiID);
+		context.dispatchStatusEventAsync("Wifi", wifiID);
 	}
 
 }
