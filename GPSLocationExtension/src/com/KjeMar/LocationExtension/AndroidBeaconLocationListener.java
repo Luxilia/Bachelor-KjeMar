@@ -25,12 +25,15 @@ public class AndroidBeaconLocationListener {
 	AndroidLocationExtensionContext context;
 	String scanId;
 	CloudCallback<NearableInfo> callback;
+	EstimoteCloud esCloud;
 	
 	
 	public AndroidBeaconLocationListener(AndroidLocationExtensionContext context){
 		this.appContext = context.getActivity().getApplicationContext();
 		this.context = context;
-		EstimoteSDK.initialize(appContext, "superposition-al0", "22cdb5affc119a3dfde6f3751eaea6e7");
+		String appID = "superposition-al0";
+		String appToken = "22cdb5affc119a3dfde6f3751eaea6e7";
+		EstimoteSDK.initialize(appContext, appID, appToken );
 		bm = new BeaconManager(appContext);
 		fullRegion = new Region("ranged region",
                 null, null, null);
@@ -47,6 +50,29 @@ public class AndroidBeaconLocationListener {
 	                }
 	            }
 		 });
+		 
+		  callback = new CloudCallback<NearableInfo>(){
+			 @Override
+				public void failure(EstimoteServerException arg0) {
+					// TODO Auto-generated method stub
+					if(arg0.getMessage() != null){	
+						sendNearableOutput(arg0.getMessage());
+					}
+					else{
+						sendNearableOutput("Unknown error connecting to EstimoteCloud");
+					}
+					
+				}
+
+				@Override
+				public void success(NearableInfo info) {
+					sendNearableOutput(info.type.text);
+					
+				}
+				
+			};
+		 
+		 
 		 bm.setNearableListener(new BeaconManager.NearableListener(){
 
 			 //TODO: Not fully implemented.
@@ -54,27 +80,8 @@ public class AndroidBeaconLocationListener {
 			public void onNearablesDiscovered(List<Nearable> list) {
 				if(!list.isEmpty()){
 					Nearable testNearable = list.get(0);
-					EstimoteCloud.getInstance().fetchNearableDetails(testNearable.identifier,new CloudCallback<NearableInfo>(){
-
-						@Override
-						public void failure(EstimoteServerException arg0) {
-							// TODO Auto-generated method stub
-							if(arg0.getMessage() != null){	
-								sendNearableOutput(arg0.getMessage());
-							}
-							else{
-								sendNearableOutput("Unknown error connecting to EstimoteCloud");
-							}
-							
-						}
-
-						@Override
-						public void success(NearableInfo info) {
-							sendNearableOutput(info.type.text);
-							
-						}
-						
-					});
+					String identifier = testNearable.identifier;
+					EstimoteCloud.getInstance().fetchNearableDetails(identifier,callback);
 				}
 				
 			}
